@@ -29,6 +29,7 @@ export class DieComponent implements OnInit {
 		  return;
 	  }
 	  this.d.low = tmp;
+	  this.configService.distribution()
   }
   changeTop(e: any) {
 	  let tmp = Number(e.target.value);
@@ -37,5 +38,6 @@ export class DieComponent implements OnInit {
 		  return;
 	  }
 	  this.d.top = Number(e.target.value);
+	  this.configService.distribution()
   }
 }

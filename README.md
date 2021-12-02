@@ -1,27 +1,52 @@
 # Justice
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+Emil is da bomb @ > 
+Setup screen -> Display (Roll mode)
 
-## Development server
+# Setup screen
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+die-selector [advanced]=true
 
-## Code scaffolding
+number of dies		die-slider
+kind of dies		die-type-slider
+num dist batches 
+(player names order)
+modes...
+reshuffle on depletion
+distribution preview
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Display
 
-## Build
+Greyed out true distribution
+Colored after probability in remaining distribution
+	? Countdown to empty bucket
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+Roll history (/ per player)
 
-## Running unit tests
+## Roll mode
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Roll button
+Undo (mutates random, i.e the next roll will not be the same as the mistaken roll)
 
-## Running end-to-end tests
+## Services
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+distributionService <- data container givet setup parametrar
+configService <- setup screen basically
+rollService <- seed / history
 
-## Further help
+## Components
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+setup component
+	custom die component low top
+	num input component
+
+dashboard component
+	distribution component
+		* staple component
+			? num / fraction
+
+roll-buttons component
+	roll component
+	undo component
+
+

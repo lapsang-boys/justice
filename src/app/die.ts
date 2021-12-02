@@ -1,6 +1,6 @@
 export class Die {
-	readonly low: number;
-	readonly top: number;
+	low: number;
+	top: number;
 
 	constructor(low: number, top: number) {
 		if (low >= top) {

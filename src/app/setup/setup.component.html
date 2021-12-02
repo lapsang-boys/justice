@@ -1,1 +1,12 @@
-<p>setup works!</p>
+<div>
+	<b>Number of die {{ min_die_bound }} {{ cur_num_die }} {{ max_die_bound }}</b>
+	<input type="range" name="numDie" [min]="min_die_bound" [max]="max_die_bound" (input)="updateDie($event)" [value]="cur_num_die">
+
+	<b>Number of batches {{ min_batches_bound }} {{ cur_num_batches }} {{ max_batches_bound }}</b>
+	<input type="range" name="numBatches" [min]="min_batches_bound" [max]="max_batches_bound" (input)="updateBatches($event)" [value]="cur_num_batches">
+</div>
+
+<div>
+	<app-die *ngFor="let i of [].constructor(cur_num_die)">
+	</app-die>
+</div>

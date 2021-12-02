@@ -5,16 +5,19 @@ import { Die } from './die';
 	providedIn: 'root'
 })
 export class ConfigService {
-	private dies: Die[] = [];
-	private numBatches: number = 1;
+	public dies: Die[] = [];
+	private numBatches: number = 2;
 
 	constructor() {
 		console.log(new Die(1, 6));
-		// console.log(new Die(8, 6));
 	}
 
 	addDie(d: Die) {
 		this.dies.push(d);
+	}
+
+	removeDie(d: Die) {
+		this.dies = this.dies.filter(dprim => dprim !== d);
 	}
 
 	reset() {

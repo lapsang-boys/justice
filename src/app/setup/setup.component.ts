@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config.service';
 
+ import {MatSliderChange} from '@angular/material/slider';
+
 @Component({
   selector: 'app-setup',
   templateUrl: './setup.component.html',
@@ -19,12 +21,12 @@ export class SetupComponent {
 	  private configService: ConfigService,
 	) { }
 
-	updateDie(e: any) {
-		this.cur_num_die = Number(e.target.value);
+	updateDie(e: MatSliderChange) {
+		this.cur_num_die = Number(e.value);
 	}
 
-	updateBatches(e: any) {
-		this.cur_num_batches = Number(e.target.value);
+	updateBatches(e: MatSliderChange) {
+		this.cur_num_batches = Number(e.value);
 		this.configService.setNumBatches(this.cur_num_batches);
 	}
 }

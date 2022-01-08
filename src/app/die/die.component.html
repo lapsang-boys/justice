@@ -1,10 +1,10 @@
 <div>
-	<div>
-		<b>Min side</b>
-		<input type="number" min="0" max="20" value="1" (input)="changeLow($event)" placeholder="Min side">
-	</div>
-	<div>
-		<b>Max side</b>
-		<input type="number" min="1" max="20" value="6" (input)="changeTop($event)" placeholder="Max side">
-	</div>
+	<mat-form-field>
+		<mat-label>Min side</mat-label>
+		<input matInput type="number" min="0" max="20" value="1" (input)="changeLow($event)" placeholder="Min side">
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Max side</mat-label>
+		<input matInput type="number" min="1" max="20" value="6" (input)="changeTop($event)" placeholder="Max side">
+	</mat-form-field>
 </div>

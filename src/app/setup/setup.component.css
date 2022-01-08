@@ -1,6 +1,15 @@
-div {
-	width: 50%;
+#setup-container {
+	width: 100wv;
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 1rem;
+	padding: 2em;
 }
+
+#range-container {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 1rem;
+	align-items: center;
+}
+

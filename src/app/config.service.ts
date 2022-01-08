@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Die } from './die';
+import { BehaviorSubject } from 'rxjs';
+import { from } from 'rxjs';
+import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 
 @Injectable({
 	providedIn: 'root'
@@ -7,7 +10,8 @@ import { Die } from './die';
 export class ConfigService {
 	public dies: Die[] = [];
 	private numBatches: number = 2;
-	public dist: number[][] = [];
+	dist: DistributionState = this.asdf();
+	distSubject = new BehaviorSubject<DistributionState>(this.dist);
 
 	constructor() {
 		console.log(new Die(1, 6));
@@ -32,7 +36,7 @@ export class ConfigService {
 		this.numBatches = numBatches;
 	}
 
-	distribution() {
+	asdf() {
 		let vals = []
 		for (let d of this.dies) {
 			let tup = []
@@ -42,8 +46,52 @@ export class ConfigService {
 			vals.push(tup)
 		}
 
+		
+		if (vals.length === 0) {
+			return new DistributionState([]);
+		}
+
 		const cartesian = (...a: any[]) => a.reduce((a, b) => a.flatMap((d: any) => b.map((e: any) => [d, e].flat())));
-		this.dist = cartesian(...vals);
-		console.log(this.dist.map(l => l.reduce((partial_sum, a) => partial_sum + a), 0));
+		const cart = cartesian(...vals);
+		const rawRolls = cart.map((l: number[]) => l.reduce((partial_sum: number, a: any) => partial_sum + a), 0);
+
+		this.dist = rawRolls;
+		// this.dist = distMap;
+		const d: Distribution = rawRolls;
+		const ds = new DistributionState(d)
+		return ds
+	}
+
+	distribution() {
+		this.distSubject.next(this.asdf());
+	}
+}
+
+export type Distribution = number[];
+
+export class DistributionState {
+	original: Distribution;
+	current: Distribution;
+
+	constructor(d: Distribution) {
+		const shuf = function shuffleArray(array: number[]): number[] {
+			for (let i = array.length - 1; i > 0; i--) {
+				const j = Math.floor(Math.random() * (i + 1));
+				[array[i], array[j]] = [array[j], array[i]];
+			}
+			return array
+		}
+
+		const dShuf = shuf(d);
+		this.original = [...dShuf];
+		this.current = [...dShuf];
+	}
+
+	sample(): number|undefined {
+		return this.current.pop();
+	}
+
+	toString(): string {
+		return this.current.toString();
 	}
 }

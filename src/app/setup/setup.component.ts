@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ConfigService } from '../config.service';
 
 @Component({
@@ -10,7 +10,7 @@ export class SetupComponent {
 
 	min_die_bound: number = 1;
 	max_die_bound: number = 3;
-	cur_num_die: number = this.min_die_bound;
+	cur_num_die: number = this.min_die_bound+1;
 
 	min_batches_bound: number = 1;
 	max_batches_bound: number = 5;

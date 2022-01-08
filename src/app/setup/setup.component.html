@@ -1,31 +1,46 @@
 <div id="setup-container">
-	<div id="range-container">
-		<b>Number of die: {{ cur_num_die }}</b>
-		<mat-slider
-			[min]="min_die_bound"
-			[max]="max_die_bound"
-			[thumbLabel]="true"
-			[tickInterval]="1"
-			[step]="1"
-			[value]="cur_num_die"
-			(input)="updateDie($event)"
-			></mat-slider>
+	<mat-accordion>
+	<mat-expansion-panel>
+		<mat-expansion-panel-header>
+		<mat-panel-title>
+			Self aware panel
+		</mat-panel-title>
+		<mat-panel-description>
+			Currently I am aware of my own panel
+		</mat-panel-description>
+		</mat-expansion-panel-header>
+		<div id="range-container">
+			<b>Number of die: {{ cur_num_die }}</b>
+			<mat-slider
+				[min]="min_die_bound"
+				[max]="max_die_bound"
+				[thumbLabel]="true"
+				[tickInterval]="1"
+				[step]="1"
+				[value]="cur_num_die"
+				(input)="updateDie($event)"
+				></mat-slider>
 
-		<b>Number of batches: {{ cur_num_batches }}</b>
-		<mat-slider
-			[min]="min_batches_bound"
-			[max]="max_batches_bound"
-			[thumbLabel]="true"
-			[tickInterval]="1"
-			[step]="1"
-			[value]="cur_num_batches"
-			(input)="updateBatches($event)"
-			></mat-slider>
-	</div>
+			<b>Number of batches: {{ cur_num_batches }}</b>
+			<mat-slider
+				[min]="min_batches_bound"
+				[max]="max_batches_bound"
+				[thumbLabel]="true"
+				[tickInterval]="1"
+				[step]="1"
+				[value]="cur_num_batches"
+				(input)="updateBatches($event)"
+				></mat-slider>
+		</div>
 
-	<div>
-		<app-die *ngFor="let i of [].constructor(cur_num_die)">
-		</app-die>
+		<div class="die-container">
+			<app-die *ngFor="let i of [].constructor(cur_num_die)">
+			</app-die>
+		</div>
+	</mat-expansion-panel>
+	</mat-accordion>
+
+	<div class="game-state">
 		<app-distribution>
 		</app-distribution>
 	</div>

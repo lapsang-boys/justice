@@ -1,4 +1,23 @@
+.outer {
+	padding: 1em;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr auto;
+	height: 50vh;
+	justify-items: center;
+	gap: 2em;
+}
+
 .graph {
 	display: flex;
-	height: 200px;
+}
+
+.roller {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1em;
+}
+
+.roll-history {
+
 }

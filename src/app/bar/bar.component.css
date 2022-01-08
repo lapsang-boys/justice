@@ -2,21 +2,33 @@
 	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: 1em;
+	grid-template-rows: 1fr auto auto;
+	gap: 0.75em;
 	justify-items: center;
 	width: 4em;
 }
 
-.label {
+.count-label, .value-label {
 	font-family: 'Roboto', sans-serif;
+}
+
+.count-label
+
+.value-label {
+	border-radius: 50%;
+	background-color: #eee;
+	width: 1em;
+	height: 1em;
+	padding: 0.75em;
+	display: flex;
+	justify-content: center;
 }
 
 #container {
 	align-self: end;
 	box-sizing: border-box;
-	width: 20px;
+	width: 2em;
 	position: relative;
-	margin: 1em 0.5em;
 	padding: 1em;
 	display: flex;
 	justify-content: center;

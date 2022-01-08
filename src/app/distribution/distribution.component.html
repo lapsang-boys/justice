@@ -1,14 +1,25 @@
-<div>
-	<button (click)="sample()">Sample</button>
-	Last sampled number: {{ lastSampledNumber }}
-</div>
+<div class="outer">
+	<div class="graph">
+		<app-bar *ngFor="let kv of pairMap | keyvalue" [value]="kv.key" [pair]="kv.value" [height]="kv.value.original" [maxHeight]="maxElement()"></app-bar>
+	</div>
 
-{{ dist.current.length }}
+	<div class="roller">
+		<button
+			mat-fab
+			color="accent"
+			(click)="sample()">
+			<mat-icon>casino</mat-icon>
+		</button>
+		<button *ngIf="lastSampledNumber"
+			mat-fab
+			color="accent">{{ lastSampledNumber }}</button>
+	</div>
 
-<div class="graph">
-	<app-bar *ngFor="let kv of pairMap | keyvalue" [value]="kv.key" [pair]="kv.value" [height]="kv.value.original" [maxHeight]="maxElement()"></app-bar>
-</div>
-
-<div>
-	<span *ngFor="let asdf of dist.current">{{ asdf }}, </span>
+	<div class="roll-history">
+		<ul>
+			<li *ngFor="let h of []">
+				{{ h }}
+			</li>
+		</ul>
+	</div>
 </div>

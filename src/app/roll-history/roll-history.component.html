@@ -1,0 +1,7 @@
+<div class="outer">
+	<div class="wrapper" *ngFor="let h of history.slice(1, historySize); let i = index">
+	<button
+		mat-mini-fab
+		color="accent" [style.opacity]="(historySize-i)/historySize">{{ h }}</button>
+	</div>
+</div>

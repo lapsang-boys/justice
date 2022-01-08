@@ -1,0 +1,9 @@
+.outer {
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.wrapper {
+	padding: 0.5em;
+}

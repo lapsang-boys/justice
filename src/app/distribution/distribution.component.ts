@@ -9,14 +9,18 @@ import { ConfigService, DistributionState, DistributionPair } from '../config.se
 export class DistributionComponent implements OnInit {
 	dist: DistributionState = new DistributionState([]);
 	pairMap: Map<number, DistributionPair> = new Map();
-	lastSampledNumber: number|undefined;
+	sampled: number[] = [];
 
 	constructor(
 		private configService: ConfigService,
 	) { }
 
 	sample(): void {
-		this.lastSampledNumber = this.dist.sample()
+		const s = this.dist.sample();
+		if (s === undefined) {
+			return;
+		}
+		this.sampled = [s as number, ...this.sampled];
 		this.pairMap = this.dist.pairMap();
 	}
 

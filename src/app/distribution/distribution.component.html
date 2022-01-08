@@ -10,16 +10,15 @@
 			(click)="sample()">
 			<mat-icon>casino</mat-icon>
 		</button>
-		<button *ngIf="lastSampledNumber"
+		<button *ngIf="!sampled"
 			mat-fab
-			color="accent">{{ lastSampledNumber }}</button>
+			color="accent"></button>
+		<button *ngIf="sampled"
+			mat-fab
+			color="accent">{{ sampled[0] }}</button>
 	</div>
 
 	<div class="roll-history">
-		<ul>
-			<li *ngFor="let h of []">
-				{{ h }}
-			</li>
-		</ul>
+		<app-roll-history [history]="sampled"></app-roll-history>
 	</div>
 </div>

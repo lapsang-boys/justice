@@ -14,7 +14,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import {MatExpansionModule} from '@angular/material/expansion'; 
 import {MatButtonModule} from '@angular/material/button'; 
-import {MatIconModule} from '@angular/material/icon'; 
+import {MatIconModule} from '@angular/material/icon';
+import { RollHistoryComponent } from './roll-history/roll-history.component'; 
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MatIconModule} from '@angular/material/icon';
     SetupComponent,
     DieComponent,
     DistributionComponent,
-    BarComponent
+    BarComponent,
+    RollHistoryComponent
   ],
   imports: [
     BrowserModule,

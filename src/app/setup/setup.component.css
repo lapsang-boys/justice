@@ -1,15 +1,20 @@
 #setup-container {
-	width: 100wv;
+	width: 100vw;
+	max-width: 100vw;
+	max-width: 100%;
+
+	box-sizing: border-box;
+	/* overflow: auto; */
 	display: grid;
 	grid-template-columns: 1fr;
 	gap: 1rem;
 	padding: 2em;
+
+	grid-template-rows: auto 1fr;
 }
 
 #range-container {
 	display: grid;
 	grid-template-columns: auto 1fr;
-	gap: 1rem;
 	align-items: center;
 }
-

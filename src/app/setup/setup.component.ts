@@ -14,7 +14,7 @@ export class SetupComponent {
 
 	min_batches_bound: number = 1;
 	max_batches_bound: number = 5;
-	cur_num_batches: number = this.min_batches_bound;
+	cur_num_batches: number = this.min_batches_bound+1;
 
 	constructor(
 	  private configService: ConfigService,

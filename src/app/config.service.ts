@@ -9,7 +9,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 })
 export class ConfigService {
 	public dies: Die[] = [];
-	private numBatches: number = 1;
+	private numBatches: number = 2;
 	dist: DistributionState = this.asdf();
 	distSubject = new BehaviorSubject<DistributionState>(this.dist);
 
@@ -19,10 +19,12 @@ export class ConfigService {
 
 	addDie(d: Die) {
 		this.dies.push(d);
+		this.distribution();
 	}
 
 	removeDie(d: Die) {
 		this.dies = this.dies.filter(dprim => dprim !== d);
+		this.distribution();
 	}
 
 	reset() {
@@ -55,6 +57,9 @@ export class ConfigService {
 
 		if (vals.length === 0) {
 			return new DistributionState([]);
+		}
+		if (vals.length === 1) {
+			return new DistributionState(duplicateArr(vals[0], this.numBatches));
 		}
 
 		const cartesian = (...a: any[]) => a.reduce((a, b) => a.flatMap((d: any) => b.map((e: any) => [d, e].flat())));
@@ -100,6 +105,10 @@ export class DistributionState {
 
 	sample(): number|undefined {
 		return this.current.pop();
+	}
+
+	sortedRemaining(): number[] {
+		return this.current.sort((a, b) => a - b);
 	}
 
 	toString(): string {

@@ -3,6 +3,14 @@
 	Last sampled number: {{ lastSampledNumber }}
 </div>
 {{ dist.current.length }}
+{{ pairMap }}
+
+<ul>
+    <li *ngFor="let kv of pairMap | keyvalue">
+        {{kv.key}} -- {{kv.value.original}} {{kv.value.current}}
+    </li>
+</ul>
+
 <div>
 	<span *ngFor="let asdf of dist.current">{{ asdf }}, </span>
 </div>

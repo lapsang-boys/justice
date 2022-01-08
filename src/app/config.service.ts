@@ -107,11 +107,56 @@ export class DistributionState {
 		return this.current.pop();
 	}
 
+	leftOf(arr: number[], n: number): number {
+		return arr.filter(d => d === n).length;
+	}
+
+	uniqueRemaining(): number[] {
+		return [...new Set(this.current)];
+	}
+
+	currentToMap(): Map<number, number> {
+		const m = new Map<number, number>();
+		this.uniqueRemaining().forEach(d => m.set(d, this.leftOf(this.current, d)));
+		return m;
+	}
+
+	originalToMap(): Map<number, number> {
+		const m = new Map<number, number>();
+		this.original.forEach(d => m.set(d, this.leftOf(this.original, d)));
+		return m;
+	}
+
+	pairMap() {
+		const cm = this.currentToMap();
+		const om = this.originalToMap();
+		const pairs = new Map<number, DistributionPair>();
+		om.forEach((v, k) => {
+			if (cm.has(k)) {
+				const p = new DistributionPair(v, cm.get(k) as number);
+				pairs.set(k, p);
+			} else {
+				pairs.set(k, new DistributionPair(v, 0));
+			}
+		});
+		return pairs;
+	}
+
 	sortedRemaining(): number[] {
 		return this.current.sort((a, b) => a - b);
 	}
 
 	toString(): string {
 		return this.current.toString();
+	}
+}
+
+
+export class DistributionPair {
+	original: number;
+	current: number;
+	constructor(o: number, c: number) {
+		this.original = o;
+		this.current = c;
 	}
 }

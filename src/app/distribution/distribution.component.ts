@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService, DistributionState } from '../config.service';
+import { ConfigService, DistributionState, DistributionPair } from '../config.service';
 
 @Component({
   selector: 'app-distribution',
@@ -8,6 +8,7 @@ import { ConfigService, DistributionState } from '../config.service';
 })
 export class DistributionComponent implements OnInit {
 	dist: DistributionState = new DistributionState([]);
+	pairMap: Map<number, DistributionPair> = new Map();
 	lastSampledNumber: number|undefined;
 
 	constructor(
@@ -16,11 +17,13 @@ export class DistributionComponent implements OnInit {
 
 	sample(): void {
 		this.lastSampledNumber = this.dist.sample()
+		this.pairMap = this.dist.pairMap();
 	}
 
 	ngOnInit(): void {
 		this.configService.distSubject.subscribe((subDist: DistributionState) => {
 			this.dist = subDist;
+			this.pairMap = this.dist.pairMap();
 		})
 		// Beautiful <3
 		setTimeout(() => this.configService.distribution(), 200);

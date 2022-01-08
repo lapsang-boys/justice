@@ -26,5 +26,6 @@ export class SetupComponent {
 
 	updateBatches(e: any) {
 		this.cur_num_batches = Number(e.target.value);
+		this.configService.setNumBatches(this.cur_num_batches);
 	}
 }

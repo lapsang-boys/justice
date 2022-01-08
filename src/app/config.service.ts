@@ -9,7 +9,7 @@ import { groupBy, mergeMap, toArray } from 'rxjs/operators';
 })
 export class ConfigService {
 	public dies: Die[] = [];
-	private numBatches: number = 2;
+	private numBatches: number = 1;
 	dist: DistributionState = this.asdf();
 	distSubject = new BehaviorSubject<DistributionState>(this.dist);
 
@@ -38,6 +38,7 @@ export class ConfigService {
 
 	asdf() {
 		let vals = []
+
 		for (let d of this.dies) {
 			let tup = []
 			for (let i = d.low; i <= d.top; i++) {
@@ -46,7 +47,12 @@ export class ConfigService {
 			vals.push(tup)
 		}
 
-		
+		const duplicateArr = (arr: any[], times: number) => {
+			return Array(times)
+				.fill([...arr])
+				.reduce((a, b) => a.concat(b));
+			}
+
 		if (vals.length === 0) {
 			return new DistributionState([]);
 		}
@@ -55,15 +61,20 @@ export class ConfigService {
 		const cart = cartesian(...vals);
 		const rawRolls = cart.map((l: number[]) => l.reduce((partial_sum: number, a: any) => partial_sum + a), 0);
 
-		this.dist = rawRolls;
-		// this.dist = distMap;
-		const d: Distribution = rawRolls;
+		const dupRolls = duplicateArr(rawRolls, this.numBatches);
+
+		const d: Distribution = dupRolls;
 		const ds = new DistributionState(d)
 		return ds
 	}
 
 	distribution() {
 		this.distSubject.next(this.asdf());
+	}
+
+	setNumBatches(numBatches: number) {
+		this.setBatches(numBatches);
+		this.distribution();
 	}
 }
 

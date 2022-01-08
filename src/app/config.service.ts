@@ -12,6 +12,8 @@ export class ConfigService {
 	private numBatches: number = 2;
 	dist: DistributionState = this.asdf();
 	distSubject = new BehaviorSubject<DistributionState>(this.dist);
+	history: number[] = [];
+	historySubject = new BehaviorSubject<number[]>(this.history);
 
 	constructor() {
 		console.log(new Die(1, 6));
@@ -70,16 +72,31 @@ export class ConfigService {
 
 		const d: Distribution = dupRolls;
 		const ds = new DistributionState(d)
+		this.dist = ds;
 		return ds
 	}
 
 	distribution() {
 		this.distSubject.next(this.asdf());
+		this.history = [];
+		this.historySubject.next(this.history);
 	}
 
 	setNumBatches(numBatches: number) {
 		this.setBatches(numBatches);
 		this.distribution();
+	}
+
+	sample(): void {
+		console.log("Sample")
+		const s = this.dist.sample();
+		console.log(s)
+		if (s === undefined) {
+			return;
+		}
+		this.history = [s as number, ...this.history];
+		this.historySubject.next(this.history);
+		this.distSubject.next(this.dist);
 	}
 }
 

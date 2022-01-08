@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-roll-history',
@@ -6,12 +7,16 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./roll-history.component.css']
 })
 export class RollHistoryComponent implements OnInit {
-	@Input() history: number[] = [];
+	history: number[] = [];
 	historySize: number = 5;
 
-  constructor() { }
+	constructor(
+		private configService: ConfigService,
+	) { }
 
-  ngOnInit(): void {
-  }
-
+	ngOnInit(): void {
+		this.configService.historySubject.subscribe((subHistory: number[]) => {
+			this.history = subHistory;
+		})
+	}
 }

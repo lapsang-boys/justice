@@ -9,25 +9,23 @@ import { ConfigService, DistributionState, DistributionPair } from '../config.se
 export class DistributionComponent implements OnInit {
 	dist: DistributionState = new DistributionState([]);
 	pairMap: Map<number, DistributionPair> = new Map();
-	sampled: number[] = [];
+	history: number[] = [];
 
 	constructor(
 		private configService: ConfigService,
 	) { }
 
 	sample(): void {
-		const s = this.dist.sample();
-		if (s === undefined) {
-			return;
-		}
-		this.sampled = [s as number, ...this.sampled];
-		this.pairMap = this.dist.pairMap();
+		this.configService.sample();
 	}
 
 	ngOnInit(): void {
 		this.configService.distSubject.subscribe((subDist: DistributionState) => {
 			this.dist = subDist;
 			this.pairMap = this.dist.pairMap();
+		})
+		this.configService.historySubject.subscribe((subHistory: number[]) => {
+			this.history = subHistory;
 		})
 		// Beautiful <3
 		setTimeout(() => this.configService.distribution(), 200);

@@ -1,7 +1,15 @@
 <div class="outer">
+	<!-- Smooth sailing -->
+	<div class="wrapper" *ngIf="history.length <= 1"
+		[style.visibility]="'hidden'">
+		<button
+			mat-mini-fab
+			color="accent">&lt;3</button>
+	</div>
+
 	<div class="wrapper" *ngFor="let h of history.slice(1, historySize); let i = index">
-	<button
-		mat-mini-fab
-		color="accent" [style.opacity]="(historySize-i)/historySize">{{ h }}</button>
+		<button
+			mat-mini-fab
+			color="accent" [style.opacity]="(historySize-i)/historySize">{{ h }}</button>
 	</div>
 </div>

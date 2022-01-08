@@ -1,0 +1,7 @@
+<div id="outer">
+	<div id="container" [style.height.%]="height/maxHeight*100">
+		<div class="original" [style.height.%]="100"></div>
+		<div class="current" [style.height.%]="pair.current/pair.original * 100"></div>
+	</div>
+	<div class="label">{{pair.current}}/{{pair.original}}</div>
+</div>

@@ -2,14 +2,12 @@
 	<button (click)="sample()">Sample</button>
 	Last sampled number: {{ lastSampledNumber }}
 </div>
-{{ dist.current.length }}
-{{ pairMap }}
 
-<ul>
-    <li *ngFor="let kv of pairMap | keyvalue">
-        {{kv.key}} -- {{kv.value.original}} {{kv.value.current}}
-    </li>
-</ul>
+{{ dist.current.length }}
+
+<div class="graph">
+	<app-bar *ngFor="let kv of pairMap | keyvalue" [value]="kv.key" [pair]="kv.value" [height]="kv.value.original" [maxHeight]="maxElement()"></app-bar>
+</div>
 
 <div>
 	<span *ngFor="let asdf of dist.current">{{ asdf }}, </span>

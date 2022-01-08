@@ -7,7 +7,6 @@ import { ConfigService } from '../config.service';
   styleUrls: ['./setup.component.css']
 })
 export class SetupComponent {
-
 	min_die_bound: number = 1;
 	max_die_bound: number = 3;
 	cur_num_die: number = this.min_die_bound+1;

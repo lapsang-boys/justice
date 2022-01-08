@@ -28,4 +28,8 @@ export class DistributionComponent implements OnInit {
 		// Beautiful <3
 		setTimeout(() => this.configService.distribution(), 200);
 	}
+
+	maxElement(): number {
+		return Math.max.apply(null, Array.from(this.pairMap.values()).map(p => p.original))
+	}
 }

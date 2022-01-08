@@ -1,0 +1,40 @@
+#outer {
+	height: 100%;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 1em;
+	justify-items: center;
+	width: 4em;
+}
+
+.label {
+	font-family: 'Roboto', sans-serif;
+}
+
+#container {
+	align-self: end;
+	box-sizing: border-box;
+	width: 20px;
+	position: relative;
+	margin: 1em 0.5em;
+	padding: 1em;
+	display: flex;
+	justify-content: center;
+}
+
+.original, .current {
+	border-radius: 0.2em;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+}
+
+.original {
+	background-color: #ccc;
+	height: 75%;
+}
+
+.current {
+	background-color: #38a;
+	height: 25%;
+}

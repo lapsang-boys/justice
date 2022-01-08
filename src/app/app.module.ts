@@ -7,6 +7,7 @@ import { SetupComponent } from './setup/setup.component';
 import { DieComponent } from './die/die.component';
 import { DistributionComponent } from './distribution/distribution.component';
 import { BarComponent } from './bar/bar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { BarComponent } from './bar/bar.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
